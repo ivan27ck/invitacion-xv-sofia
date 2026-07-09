@@ -26,7 +26,7 @@
   z-index: 2;
 }
 
-/* Ventana de foto · encaja dentro del marco central */
+/* Marco · contenedor fijo calibrado al fondo; la foto se acomoda sin deformarse */
 .carrusel__viewport {
   position: absolute;
   top: var(--photo-top);
@@ -38,12 +38,12 @@
 }
 
 .carrusel__photo {
-  position: absolute;
-  inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
+  max-width: none;
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center center;
   opacity: 0;
   transition: opacity 0.55s ease;
   pointer-events: none;
