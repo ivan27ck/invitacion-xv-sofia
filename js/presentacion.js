@@ -39,8 +39,8 @@ export function initPresentacionAnim() {
       subtitle?.classList.add('animar');
       line?.classList.add('animar');
       lineBottom?.classList.add('animar');
-      if (guarda) envolverPalabras(guarda, 3.3, 0.12);
-      if (fecha) envolverPalabras(fecha, 3.8, 0.12);
+      if (guarda) envolverPalabras(guarda, 1.9, 0.1);
+      if (fecha) envolverPalabras(fecha, 2.3, 0.1);
 
       animObserver.unobserve(entry.target);
     });

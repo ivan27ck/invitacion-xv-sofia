@@ -1,0 +1,196 @@
+/* ============================================
+   Sección 6 — Itinerario 2 (alternado)
+   ============================================ */
+
+#itinerario2.invite-card {
+  height: auto;
+  min-height: 100dvh;
+  overflow: visible;
+}
+
+#itinerario2 .bg {
+  object-fit: cover;
+}
+
+#itinerario2 .content {
+  position: relative;
+  display: block;
+  padding: clamp(68px, 13vh, 100px) clamp(16px, 5vw, 32px) clamp(60px, 11vh, 88px);
+  z-index: 1;
+}
+
+/* ---------- Encabezado ---------- */
+.it2__header {
+  text-align: center;
+  margin-bottom: clamp(40px, 8vh, 60px);
+}
+
+.it2__title {
+  font-family: var(--font-caps);
+  font-size: clamp(22px, 5.2vw, 32px);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--navy);
+  margin: 0;
+  line-height: 1.25;
+}
+
+/* ---------- Timeline centrada ---------- */
+.it2__timeline {
+  position: relative;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 4px 0;
+}
+
+.it2__line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    180deg,
+    var(--silver-bright) 0%,
+    var(--silver-mid) 50%,
+    var(--slate-blue) 100%
+  );
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* ---------- Ítem alternado ---------- */
+.it2__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: clamp(10px, 3vw, 16px);
+  margin-bottom: clamp(36px, 7vh, 52px);
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.it2__item:last-child {
+  margin-bottom: 0;
+}
+
+.it2__item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Derecha: hora ← nodo → texto */
+.it2__item--right .it2__time {
+  grid-column: 1;
+  text-align: right;
+}
+
+.it2__item--right .it2__node {
+  grid-column: 2;
+}
+
+.it2__item--right .it2__body {
+  grid-column: 3;
+  text-align: left;
+}
+
+/* Izquierda: texto ← nodo → hora */
+.it2__item--left .it2__body {
+  grid-column: 1;
+  text-align: right;
+}
+
+.it2__item--left .it2__node {
+  grid-column: 2;
+}
+
+.it2__item--left .it2__time {
+  grid-column: 3;
+  text-align: left;
+}
+
+/* ---------- Nodo con icono ---------- */
+.it2__node {
+  position: relative;
+  z-index: 1;
+  width: clamp(38px, 9.5vw, 44px);
+  height: clamp(38px, 9.5vw, 44px);
+  border-radius: 50%;
+  background: var(--cream);
+  border: 2px solid var(--gold);
+  box-shadow:
+    0 0 0 1px var(--gold-light),
+    0 2px 8px rgba(46, 74, 99, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.it2__node i {
+  font-size: clamp(13px, 3vw, 15px);
+  color: var(--gold);
+}
+
+.it2__item--special .it2__node {
+  background: var(--navy);
+  border-color: var(--gold-light);
+}
+
+.it2__item--special .it2__node i {
+  color: var(--gold-light);
+}
+
+/* ---------- Textos ---------- */
+.it2__time {
+  font-family: var(--font-sans);
+  font-size: clamp(9px, 2vw, 11px);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--silver-dark);
+  margin: 0;
+}
+
+.it2__item-title {
+  font-family: var(--font-body);
+  font-size: clamp(17px, 4vw, 22px);
+  font-weight: 600;
+  color: var(--navy);
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+
+.it2__desc {
+  font-family: var(--font-body);
+  font-size: clamp(12px, 2.6vw, 14px);
+  font-style: italic;
+  color: var(--slate-blue);
+  margin: 0;
+  line-height: 1.45;
+}
+
+@media (max-width: 340px) {
+  .it2__item {
+    gap: 8px;
+  }
+
+  .it2__item-title {
+    font-size: 15px;
+  }
+
+  .it2__desc {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .it2__item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

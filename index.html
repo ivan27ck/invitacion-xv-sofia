@@ -123,6 +123,57 @@
     </div>
   </section>
 
+  <!-- Sección 5 — Itinerario -->
+  <section id="itinerario" class="invite-card" style="--ar: 768/1376;">
+    <img class="bg reveal" src="assets/images/bg-itinerario.png" alt="Fondo decorativo del itinerario">
+
+    <div class="content">
+      <header class="itinerario__header reveal">
+        <p class="itinerario__eyebrow">Programa</p>
+        <h2 class="itinerario__title">Así se irá dando la noche</h2>
+        <div class="itinerario__rule" aria-hidden="true"></div>
+      </header>
+
+      <div class="itinerario__timeline" id="itinerario-timeline">
+        <svg class="itinerario__thread" id="itinerario-thread" aria-hidden="true">
+          <defs>
+            <linearGradient id="itinerario-gradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--silver-bright)" />
+              <stop offset="55%" stop-color="var(--silver-mid)" />
+              <stop offset="100%" stop-color="var(--slate-blue)" />
+            </linearGradient>
+          </defs>
+          <path id="itinerario-thread-path" d="" fill="none" stroke="url(#itinerario-gradient)" stroke-width="3" />
+        </svg>
+        <div class="itinerario__items" id="itinerario-items"></div>
+      </div>
+    </div>
+
+    <div class="conejo" aria-hidden="true">
+      <div class="conejo__sprite" role="img" aria-label="Conejo Blanco preocupado">
+        <span class="conejo__frame conejo__frame--1"></span>
+        <span class="conejo__frame conejo__frame--2"></span>
+        <span class="conejo__frame conejo__frame--3"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección 6 — Itinerario 2 (alternado) -->
+  <section id="itinerario2" class="invite-card" style="--ar: 768/1376;">
+    <img class="bg reveal" src="assets/images/bg-itinerario.png" alt="Fondo decorativo del itinerario">
+
+    <div class="content">
+      <header class="it2__header reveal">
+        <h2 class="it2__title">Itinerario del Día</h2>
+      </header>
+
+      <div class="it2__timeline" id="itinerario2-timeline">
+        <div class="it2__line" aria-hidden="true"></div>
+        <div class="it2__items" id="itinerario2-items"></div>
+      </div>
+    </div>
+  </section>
+
   <script type="module" src="js/main.js"></script>
 </body>
 </html>
