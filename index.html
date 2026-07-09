@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Invitación XV Años de Sofia · Alicia en el País de las Maravillas">
+  <title>XV Años de Sofia · Alicia en el País de las Maravillas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- Sección 1 — Presentación -->
+  <section id="presentacion" class="invite-card" style="--ar: 853/1280;">
+    <img class="bg reveal" src="assets/images/bg-presentacion.png" alt="Marco decorativo Alicia en el País de las Maravillas">
+
+    <div class="content">
+      <h1 class="name" id="presentacion-name">
+        <span class="name__shadow" aria-hidden="true">Sofia</span>
+        <span class="name__front">Sofia</span>
+      </h1>
+      <p class="subtitle" id="presentacion-subtitle">Mis quince años</p>
+      <div class="presentacion__line" id="presentacion-line" aria-hidden="true"></div>
+      <div class="date-tag">
+        <span class="date-tag__label" id="presentacion-guarda">Guarda la fecha</span>
+        <span class="date-tag__value" id="presentacion-fecha">14 · Noviembre · 2026</span>
+      </div>
+      <div class="presentacion__line presentacion__line--bottom" id="presentacion-line-bottom" aria-hidden="true"></div>
+    </div>
+
+    <a href="#contador" class="scroll-cue">
+      Sigue al Conejo Blanco
+      <span class="arrow">↓</span>
+    </a>
+  </section>
+
+  <!-- Sección 2 — Contador -->
+  <section id="contador" class="invite-card" style="--ar: 904/1280;">
+    <img class="bg reveal" src="assets/images/bg-contador.png" alt="Marco decorativo del Conejo Blanco">
+
+    <div class="content">
+      <p class="eyebrow reveal">"¡Vamos tarde, vamos tarde!"</p>
+      <h2 class="heading reveal draw-title" data-draw="El tiempo se agota">El tiempo se agota</h2>
+
+      <div class="countdown reveal" id="countdown">
+        <div class="watch">
+          <span class="roman xii">XII</span><span class="roman iii">III</span>
+          <span class="roman vi">VI</span><span class="roman ix">IX</span>
+          <span class="watch__num" id="cd-days">00</span>
+          <span class="watch__label">Días</span>
+        </div>
+        <div class="watch">
+          <span class="roman xii">XII</span><span class="roman iii">III</span>
+          <span class="roman vi">VI</span><span class="roman ix">IX</span>
+          <span class="watch__num" id="cd-hours">00</span>
+          <span class="watch__label">Hrs</span>
+        </div>
+        <div class="watch">
+          <span class="roman xii">XII</span><span class="roman iii">III</span>
+          <span class="roman vi">VI</span><span class="roman ix">IX</span>
+          <span class="watch__num" id="cd-mins">00</span>
+          <span class="watch__label">Min</span>
+        </div>
+        <div class="watch">
+          <span class="roman xii">XII</span><span class="roman iii">III</span>
+          <span class="roman vi">VI</span><span class="roman ix">IX</span>
+          <span class="watch__num" id="cd-secs">00</span>
+          <span class="watch__label">Seg</span>
+        </div>
+      </div>
+
+      <p class="date-small reveal">14 de noviembre, 2026 · 7:00 PM</p>
+    </div>
+  </section>
+
+  <!-- Sección 3 — Galería -->
+  <section id="galeria" class="invite-card" style="--ar: 848/1256;">
+    <img class="bg reveal" src="assets/galeria/fondo.png" alt="Marco decorativo con rosas azules y blancas">
+
+    <div class="content">
+      <h2 class="galeria__title reveal draw-title" data-draw="Recuerdos">Recuerdos</h2>
+
+      <div class="galeria__frames" id="galeria-frames">
+        <figure class="g-frame g-frame--gold"   style="--top:13%; --left:7%;  --rot:-6deg;">
+          <div class="g-frame__mat"><img class="g-frame__photo" src="assets/galeria/download.jpg" alt="Sofia"></div>
+        </figure>
+        <figure class="g-frame g-frame--silver" style="--top:15%; --left:55%; --rot:5deg;">
+          <div class="g-frame__mat"><img class="g-frame__photo" src="assets/galeria/download (1).jpg" alt="Sofia"></div>
+        </figure>
+        <figure class="g-frame g-frame--silver" style="--top:40%; --left:16%; --rot:4deg;">
+          <div class="g-frame__mat"><img class="g-frame__photo" src="assets/galeria/download.jpg" alt="Sofia"></div>
+        </figure>
+        <figure class="g-frame g-frame--gold"   style="--top:41%; --left:57%; --rot:-5deg;">
+          <div class="g-frame__mat"><img class="g-frame__photo" src="assets/galeria/download (1).jpg" alt="Sofia"></div>
+        </figure>
+        <figure class="g-frame g-frame--gold"   style="--top:64%; --left:9%;  --rot:5deg;">
+          <div class="g-frame__mat"><img class="g-frame__photo" src="assets/galeria/download.jpg" alt="Sofia"></div>
+        </figure>
+        <figure class="g-frame g-frame--silver" style="--top:65%; --left:53%; --rot:-4deg;">
+          <div class="g-frame__mat"><img class="g-frame__photo" src="assets/galeria/download (1).jpg" alt="Sofia"></div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección 4 — Galería 2 (carrusel) -->
+  <section id="galeria2" class="invite-card" style="--ar: 853/1280;">
+    <img class="bg reveal" src="assets/images/bg-carrusel.png" alt="Galería con marco victoriano y flechas">
+
+    <div class="content">
+      <div class="carrusel" id="carrusel">
+        <div class="carrusel__viewport"></div>
+
+        <button type="button" class="carrusel__btn carrusel__btn--prev" aria-label="Foto anterior">
+          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="carrusel__btn carrusel__btn--next" aria-label="Foto siguiente">
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </button>
+
+        <div class="carrusel__dots" role="tablist" aria-label="Fotos de la galería"></div>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

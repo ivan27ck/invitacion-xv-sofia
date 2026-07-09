@@ -1,0 +1,42 @@
+/** Animación de títulos · letra por letra */
+
+const animatedTitles = new Set();
+
+function wrapLetters(el, text) {
+  const cs = getComputedStyle(el);
+  const displayText = cs.textTransform === 'uppercase' ? text.toUpperCase() : text;
+
+  el.textContent = '';
+  el.setAttribute('aria-label', text);
+
+  [...displayText].forEach((char, index) => {
+    const span = document.createElement('span');
+    span.className = 'draw-letter';
+    span.style.setProperty('--i', index);
+    span.textContent = char === ' ' ? '\u00a0' : char;
+    el.appendChild(span);
+  });
+}
+
+export function animateDrawTitle(el) {
+  if (animatedTitles.has(el)) return;
+  animatedTitles.add(el);
+
+  const text = el.dataset.draw || el.textContent.trim();
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduced) {
+    el.textContent = text;
+    el.setAttribute('aria-label', text);
+    el.classList.add('draw-title--static');
+    return;
+  }
+
+  wrapLetters(el, text);
+  el.classList.add('draw-title--animating');
+  requestAnimationFrame(() => {
+    el.querySelectorAll('.draw-letter').forEach((letter) => {
+      letter.classList.add('draw-letter--in');
+    });
+  });
+}

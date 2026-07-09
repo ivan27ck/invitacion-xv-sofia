@@ -1,0 +1,178 @@
+/* ============================================
+   Sección 1 — Presentación
+   ============================================ */
+
+#presentacion .content {
+  padding: 18% 10% 22%;
+  justify-content: center;
+  gap: clamp(10px, 2.2vw, 18px);
+}
+
+#presentacion .name {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-script);
+  font-size: clamp(68px, 19vw, 118px);
+  line-height: 0.95;
+  margin: 0;
+  opacity: 0;
+}
+
+#presentacion .name.animar {
+  animation: pres-nameFadeIn 2.2s ease-out forwards;
+}
+
+#presentacion .name__shadow {
+  position: absolute;
+  left: 0.025em;
+  top: 0.035em;
+  color: var(--navy-shadow);
+  opacity: 0.65;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#presentacion .name__front {
+  position: relative;
+  z-index: 1;
+  color: var(--navy);
+}
+
+#presentacion .subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(9px, 2.1vw, 12px);
+  font-weight: 600;
+  letter-spacing: 0.48em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin: 0.35em 0 0;
+  opacity: 0;
+}
+
+#presentacion .subtitle.animar {
+  animation: pres-fadeSlideUp 0.8s ease-out forwards;
+  animation-delay: 2.2s;
+}
+
+#presentacion .presentacion__line {
+  width: min(68vw, 260px);
+  height: 1px;
+  background: var(--navy-soft);
+  margin: clamp(14px, 3vw, 20px) 0 clamp(10px, 2.5vw, 16px);
+  transform: scaleX(0);
+  transform-origin: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#presentacion .presentacion__line.animar {
+  animation: pres-drawLine 0.9s ease-in-out forwards;
+}
+
+#presentacion #presentacion-line.animar {
+  animation-delay: 2.7s;
+}
+
+#presentacion #presentacion-line.animar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -40%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+  animation: pres-shimmer 3.5s ease-in-out 3.8s infinite;
+}
+
+#presentacion .presentacion__line--bottom {
+  margin: clamp(12px, 2.8vw, 18px) 0 0;
+}
+
+#presentacion #presentacion-line-bottom.animar {
+  animation-delay: 4.95s;
+}
+
+#presentacion #presentacion-line-bottom.animar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -40%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+  animation: pres-shimmer 3.5s ease-in-out 6.1s infinite;
+}
+
+#presentacion .date-tag {
+  border: none;
+  padding: 0 28px;
+  gap: 8px;
+}
+
+#presentacion .animar-palabras span {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(4px);
+  animation: pres-revelarPalabra 0.6s ease-out forwards;
+}
+
+@keyframes pres-nameFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pres-fadeSlideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pres-drawLine {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes pres-shimmer {
+  0%   { left: -40%; opacity: 0; }
+  50%  { opacity: 0.55; }
+  100% { left: 110%; opacity: 0; }
+}
+
+@keyframes pres-revelarPalabra {
+  from { opacity: 0; filter: blur(4px); transform: translateY(6px); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #presentacion .name { opacity: 1; animation: none !important; }
+  #presentacion .subtitle { opacity: 1; animation: none !important; }
+  #presentacion .presentacion__line { transform: scaleX(1); animation: none !important; }
+  #presentacion .presentacion__line::after { animation: none !important; }
+  #presentacion .animar-palabras span { opacity: 1; filter: none; animation: none !important; }
+}
+
+#presentacion .date-tag__label {
+  font-family: var(--font-sans);
+  font-size: clamp(8px, 1.8vw, 11px);
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+#presentacion .date-tag__value {
+  font-family: var(--font-caps);
+  font-size: clamp(14px, 3.2vw, 19px);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+#presentacion .scroll-cue {
+  font-family: var(--font-sans);
+  font-size: clamp(7.5px, 1.6vw, 9.5px);
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  color: var(--navy);
+  opacity: 0.9;
+}
