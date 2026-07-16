@@ -40,6 +40,7 @@ export function initItinerario2() {
   });
 
   const items = [...wrap.querySelectorAll('.it2__item')];
+  const scroller = section.querySelector('.content');
   let lastVisible = -1;
 
   function growLineTo(index) {
@@ -84,11 +85,30 @@ export function initItinerario2() {
       }, delay);
     });
   }, {
-    threshold: 0.45,
-    rootMargin: '0px 0px -12% 0px',
+    root: scroller,
+    threshold: 0.35,
+    rootMargin: '0px 0px -8% 0px',
   });
 
   items.forEach((item) => observer.observe(item));
+
+  /* Mantener el scroll dentro del itinerario hasta llegar al final (o al inicio) */
+  if (scroller) {
+    scroller.addEventListener('wheel', (e) => {
+      const maxScroll = scroller.scrollHeight - scroller.clientHeight;
+      if (maxScroll <= 0) return;
+
+      const atTop = scroller.scrollTop <= 0;
+      const atBottom = scroller.scrollTop >= maxScroll - 2;
+
+      if ((e.deltaY < 0 && atTop) || (e.deltaY > 0 && atBottom)) {
+        return;
+      }
+
+      e.preventDefault();
+      scroller.scrollTop += e.deltaY;
+    }, { passive: false });
+  }
 
   window.addEventListener('resize', () => {
     if (lastVisible >= 0) growLineTo(lastVisible);
