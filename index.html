@@ -73,42 +73,12 @@
     </div>
   </section>
 
-  <!-- Sección 3 — Galería -->
-  <section id="galeria" class="invite-card" style="--ar: 848/1256;">
-    <img class="bg reveal" src="assets/galeria/fondo.png" alt="Marco decorativo con rosas azules y blancas">
-
-    <div class="content">
-      <h2 class="galeria__title reveal draw-title" data-draw="Recuerdos">Recuerdos</h2>
-
-      <div class="galeria__frames" id="galeria-frames">
-        <figure class="g-frame g-frame--gold"   style="--top:13%; --left:7%;  --rot:-6deg;">
-          <div class="g-frame__mat"><img class="g-frame__photo" src="assets/galeria/download.jpg" alt="Sofia"></div>
-        </figure>
-        <figure class="g-frame g-frame--silver" style="--top:15%; --left:55%; --rot:5deg;">
-          <div class="g-frame__mat"><img class="g-frame__photo" src="assets/galeria/download (1).jpg" alt="Sofia"></div>
-        </figure>
-        <figure class="g-frame g-frame--silver" style="--top:40%; --left:16%; --rot:4deg;">
-          <div class="g-frame__mat"><img class="g-frame__photo" src="assets/galeria/download.jpg" alt="Sofia"></div>
-        </figure>
-        <figure class="g-frame g-frame--gold"   style="--top:41%; --left:57%; --rot:-5deg;">
-          <div class="g-frame__mat"><img class="g-frame__photo" src="assets/galeria/download (1).jpg" alt="Sofia"></div>
-        </figure>
-        <figure class="g-frame g-frame--gold"   style="--top:64%; --left:9%;  --rot:5deg;">
-          <div class="g-frame__mat"><img class="g-frame__photo" src="assets/galeria/download.jpg" alt="Sofia"></div>
-        </figure>
-        <figure class="g-frame g-frame--silver" style="--top:65%; --left:53%; --rot:-4deg;">
-          <div class="g-frame__mat"><img class="g-frame__photo" src="assets/galeria/download (1).jpg" alt="Sofia"></div>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sección 4 — Galería 2 (carrusel) -->
+  <!-- Sección 3 — Galería (carrusel) -->
   <section id="galeria2" class="invite-card" style="--ar: 853/1280;">
     <img class="bg reveal" src="assets/images/bg-carrusel.png" alt="Galería con marco victoriano y flechas">
 
     <div class="content">
-      <div class="carrusel" id="carrusel">
+      <div class="carrusel">
         <div class="carrusel__viewport"></div>
 
         <button type="button" class="carrusel__btn carrusel__btn--prev" aria-label="Foto anterior">
@@ -123,42 +93,28 @@
     </div>
   </section>
 
-  <!-- Sección 5 — Itinerario -->
-  <section id="itinerario" class="invite-card" style="--ar: 768/1376;">
-    <img class="bg reveal" src="assets/images/bg-itinerario.png" alt="Fondo decorativo del itinerario">
+  <!-- Sección 4 — Galería coverflow -->
+  <section id="galeria-coverflow" class="invite-card" style="--ar: 941/1672;" aria-label="Galería de recuerdos">
+    <img class="bg reveal" src="assets/images/carrusel-animado.png" alt="Fondo decorativo con rosas">
 
-    <div class="content">
-      <header class="itinerario__header reveal">
-        <p class="itinerario__eyebrow">Programa</p>
-        <h2 class="itinerario__title">Así se irá dando la noche</h2>
-        <div class="itinerario__rule" aria-hidden="true"></div>
+    <div class="content gcv__content">
+      <header class="gcv__header">
+        <span class="gcv__eyebrow">Recuerdos</span>
+        <h2 class="gcv__title">Galería de Alicia</h2>
+        <p class="gcv__lead">Cada fotografía cuenta un capítulo diferente de esta maravillosa historia.</p>
       </header>
 
-      <div class="itinerario__timeline" id="itinerario-timeline">
-        <svg class="itinerario__thread" id="itinerario-thread" aria-hidden="true">
-          <defs>
-            <linearGradient id="itinerario-gradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="var(--silver-bright)" />
-              <stop offset="55%" stop-color="var(--silver-mid)" />
-              <stop offset="100%" stop-color="var(--slate-blue)" />
-            </linearGradient>
-          </defs>
-          <path id="itinerario-thread-path" d="" fill="none" stroke="url(#itinerario-gradient)" stroke-width="3" />
-        </svg>
-        <div class="itinerario__items" id="itinerario-items"></div>
+      <div class="gcv__coverflow">
+        <button type="button" class="gcv__nav gcv__nav--prev" aria-label="Foto anterior">❮</button>
+        <div class="gcv__track"></div>
+        <button type="button" class="gcv__nav gcv__nav--next" aria-label="Foto siguiente">❯</button>
       </div>
-    </div>
 
-    <div class="conejo" aria-hidden="true">
-      <div class="conejo__sprite" role="img" aria-label="Conejo Blanco preocupado">
-        <span class="conejo__frame conejo__frame--1"></span>
-        <span class="conejo__frame conejo__frame--2"></span>
-        <span class="conejo__frame conejo__frame--3"></span>
-      </div>
+      <div class="gcv__indicators" role="tablist" aria-label="Fotos de la galería"></div>
     </div>
   </section>
 
-  <!-- Sección 6 — Itinerario 2 (alternado) -->
+  <!-- Sección 5 — Itinerario -->
   <section id="itinerario2" class="invite-card" style="--ar: 768/1376;">
     <img class="bg reveal" src="assets/images/bg-itinerario.png" alt="Fondo decorativo del itinerario">
 

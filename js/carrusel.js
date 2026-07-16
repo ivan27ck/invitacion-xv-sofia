@@ -1,4 +1,4 @@
-/** Carrusel · galería 2 */
+/** Carrusel · galerías con marco */
 
 import { GALERIA_FOTOS } from './config.js';
 
@@ -7,8 +7,8 @@ function buildSrcset(photo) {
   return `${photo.src} 1x, ${photo.src2x} 2x`;
 }
 
-export function initCarrusel() {
-  const section = document.getElementById('galeria2');
+function initCarruselIn(sectionId) {
+  const section = document.getElementById(sectionId);
   if (!section) return;
 
   const viewport = section.querySelector('.carrusel__viewport');
@@ -28,8 +28,6 @@ export function initCarrusel() {
     img.alt = item.alt;
     img.decoding = 'async';
     img.loading = i === 0 ? 'eager' : 'lazy';
-    // Sin width/height en el HTML: el marco (.carrusel__viewport) define el tamaño;
-    // object-fit: cover en CSS recorta sin estirar la proporción.
     img.sizes = '(max-width: 480px) 45vw, 400px';
 
     const srcset = buildSrcset(item);
@@ -79,4 +77,8 @@ export function initCarrusel() {
     if (Math.abs(diff) < 40) return;
     goTo(diff < 0 ? current + 1 : current - 1);
   }, { passive: true });
+}
+
+export function initCarrusel() {
+  initCarruselIn('galeria2');
 }

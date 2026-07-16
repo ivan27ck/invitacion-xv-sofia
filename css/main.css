@@ -1,7 +1,6 @@
 @import url('base.css');
 @import url('presentacion.css');
 @import url('contador.css');
-@import url('galeria.css');
 @import url('galeria2.css');
-@import url('itinerario.css');
+@import url('../galeria-coverflow/coverflow.css');
 @import url('itinerario2.css');

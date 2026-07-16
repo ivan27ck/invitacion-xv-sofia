@@ -8,8 +8,9 @@ export const EVENT_DATE = new Date('2026-11-14T19:00:00');
  * src2x es opcional (versión retina, el doble de tamaño).
  */
 export const GALERIA_FOTOS = [
-  { src: 'assets/galeria/download.jpg', alt: 'Sofia' },
   { src: 'assets/galeria/download (1).jpg', alt: 'Sofia' },
+  { src: 'assets/galeria/download.jpg', alt: 'Sofia' },
+  { src: 'assets/galeria/download1.jpg', alt: 'Sofia' },
 ];
 
 /** Itinerario del evento · edita horarios, textos e iconos (Font Awesome) */
