@@ -1,1263 +1,496 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmación · Vista previa</title>
 
-    <title>Galería Alicia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ===========================
+            VARIABLES
+    =========================== */
+
+    :root {
+      --paper: #F4EAD8;
+      --paper2: #EBD9BF;
+      --blue: #355D7A;
+      --blue-light: #4D7293;
+      --gold: #B79A63;
+      --text: #3F4B58;
+      --white: #ffffff;
+    }
+
+    /* ===========================
+            RESET
+    =========================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background:
+        radial-gradient(
+          circle at top,
+          #F8EEDF 0%,
+          #F3E3CF 35%,
+          #EAD7BE 70%,
+          #E3CCAE 100%
+        );
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ===========================
+          SECCIÓN
+    =========================== */
+
+    .confirmation-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 100px 20px;
+    }
+
+    /* ===========================
+          TARJETA
+    =========================== */
+
+    .confirmation-card {
+      width: min(95vw, 650px);
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 1.2s ease;
+    }
+
+    /* ===========================
+            ADORNO
+    =========================== */
+
+    .top-ornament {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .top-ornament img {
+      width: 100%;
+    }
+
+    /* ===========================
+            TITULO
+    =========================== */
+
+      .title {
+        font-size: 64px;
+        color: var(--blue);
+        font-weight: 600;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        margin-top: 40px;
+        margin-bottom: 20px;
+      }
+
+    /* ===========================
+          DIVISOR
+    =========================== */
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 45px;
+    }
+
+    .divider span {
+      width: 140px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    .divider i {
+      color: var(--gold);
+      font-size: 14px;
+    }
+
+    /* ===========================
+          SUBTEXTO
+    =========================== */
+
+    .subtitle {
+      font-size: 34px;
+      color: var(--blue);
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 35px;
+    }
+
+    .description {
+      font-size: 28px;
+      color: #6A675F;
+      line-height: 1.7;
+      margin-bottom: 60px;
+    }
+
+    .description strong {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    /* ===========================
+          BOTÓN
+    =========================== */
+
+    .confirm-btn {
+      position: relative;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      padding: 22px 58px;
+      border-radius: 100px;
+      text-decoration: none;
+      color: white;
+      font-size: 24px;
+      letter-spacing: 1px;
+      background: linear-gradient(180deg, #547A99, #355D7A);
+      border: 2px solid rgba(183, 154, 99, 0.8);
+      box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.15),
+        inset 0 2px 4px rgba(255, 255, 255, 0.25),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.18);
+      transition: 0.4s;
+    }
+
+    .confirm-btn span {
+      position: relative;
+      z-index: 2;
+    }
+
+    .confirm-btn i {
+      margin-right: 12px;
+    }
+
+    /* ===========================
+          BRILLO
+    =========================== */
+
+    .shine {
+      position: absolute;
+      top: -50%;
+      left: -120%;
+      width: 80px;
+      height: 250%;
+      transform: rotate(25deg);
+      background: linear-gradient(transparent, rgba(255, 255, 255, 0.55), transparent);
+    }
+
+    /* ===========================
+          HOVER
+    =========================== */
+
+    .confirm-btn:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.20);
+    }
+
+    .confirm-btn:hover .shine {
+      animation: shine 1s forwards;
+    }
+
+    /* ===========================
+          PARTICULAS
+    =========================== */
+
+    .sparkle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+      opacity: 0.35;
+      filter: blur(1px);
+    }
+
+    .sparkle-1 {
+      top: 18%;
+      left: 18%;
+      animation: twinkle 5s infinite;
+    }
+
+    .sparkle-2 {
+      right: 16%;
+      top: 24%;
+      animation: twinkle 7s infinite;
+    }
+
+    .sparkle-3 {
+      left: 20%;
+      bottom: 18%;
+      animation: twinkle 6s infinite;
+    }
+
+    .sparkle-4 {
+      right: 18%;
+      bottom: 15%;
+      animation: twinkle 4s infinite;
+    }
+
+    /* ===========================
+          ANIMACIONES
+    =========================== */
+
+    @keyframes shine {
+      100% {
+        left: 180%;
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(60px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.8);
+      }
+    }
+
+    /* ===========================
+          RESPONSIVE
+    =========================== */
+
+    @media (max-width: 768px) {
+      .title {
+        font-size: 46px;
+        letter-spacing: 3px;
+      }
+
+      .subtitle {
+        font-size: 28px;
+      }
+
+      .description {
+        font-size: 22px;
+      }
+
+      .confirm-btn {
+        padding: 18px 35px;
+        font-size: 20px;
+      }
+
+      .divider span {
+        width: 80px;
+      }
+
+      .top-ornament {
+        width: 170px;
+      }
+    }
+
+    /* ===========================
+            RIPPLE
+    =========================== */
+
+    .confirm-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      background: rgba(255, 255, 255, 0.35);
+      animation: ripple 0.7s linear;
+      pointer-events: none;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<section class="gallery-section">
+  <section class="confirmation-section">
 
-    <!-- Decoraciones -->
-    <div class="floating-decoration deco-1">♠</div>
-    <div class="floating-decoration deco-2">♥</div>
-    <div class="floating-decoration deco-3">♣</div>
-    <div class="floating-decoration deco-4">♦</div>
+    <div class="sparkle sparkle-1"></div>
+    <div class="sparkle sparkle-2"></div>
+    <div class="sparkle sparkle-3"></div>
+    <div class="sparkle sparkle-4"></div>
 
-    <div class="gallery-header">
+    <div class="confirmation-card">
+      <h2 class="title">Confirmación</h2>
 
-        <span class="subtitle">
-            Recuerdos
+      <div class="divider">
+        <span></span>
+        <i class="fa-solid fa-heart"></i>
+        <span></span>
+      </div>
+
+      <p class="subtitle">
+        Tu presencia hará<br>
+        este día aún más especial.
+      </p>
+
+      <p class="description">
+        Agradecemos confirmar<br>
+        tu asistencia antes del<br>
+        <strong>22 de agosto.</strong>
+      </p>
+
+      <a
+        href="https://forms.gle/TUFORMULARIO"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="confirm-btn"
+      >
+        <span>
+          <i class="fa-solid fa-envelope-open"></i>
+          Confirmar asistencia
         </span>
-
-        <h2>
-            Galería de Alicia
-        </h2>
-
-        <p>
-            Cada fotografía cuenta un capítulo diferente de esta maravillosa historia.
-        </p>
-
+        <div class="shine"></div>
+      </a>
     </div>
 
-
-    <div class="coverflow">
-
-        <button class="nav prev">
-            ❮
-        </button>
-
-
-        <div class="coverflow-track">
-
-            <div class="card active">
-                <img src="img/1.jpg">
-            </div>
-
-            <div class="card">
-                <img src="img/2.jpg">
-            </div>
-
-            <div class="card">
-                <img src="img/3.jpg">
-            </div>
-
-            <div class="card">
-                <img src="img/4.jpg">
-            </div>
-
-            <div class="card">
-                <img src="img/5.jpg">
-            </div>
-
-            <div class="card">
-                <img src="img/6.jpg">
-            </div>
-
-        </div>
-
-
-        <button class="nav next">
-            ❯
-        </button>
-
-    </div>
-
-
-    <div class="gallery-indicators">
-
-        <span class="indicator active"></span>
-        <span class="indicator"></span>
-        <span class="indicator"></span>
-        <span class="indicator"></span>
-        <span class="indicator"></span>
-        <span class="indicator"></span>
-
-    </div>
-
-</section>
-
-
-<script src="script.js"></script>
-
-</body>
-
-</html>
-
-
-/* ==========================================
-   VARIABLES
-========================================== */
-
-:root{
-
-    --bg:#F7F1E7;
-    --bg2:#EFE3D0;
-
-    --blue:#6E849A;
-    --blue-dark:#51697F;
-
-    --gold:#CBB99A;
-    --cream:#FFFDF8;
-
-    --text:#5E544A;
-
-    --shadow:0 20px 50px rgba(0,0,0,.15);
-
-    --radius:28px;
-
-}
-
-
-/* ==========================================
-   RESET
-========================================== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-
-    scroll-behavior:smooth;
-
-}
-
-body{
-
-    font-family:
-    "Segoe UI",
-    sans-serif;
-
-    background:
-    linear-gradient(
-        180deg,
-        var(--bg),
-        var(--bg2)
-    );
-
-    color:var(--text);
-
-    overflow-x:hidden;
-
-}
-
-
-/* ==========================================
-   GALERÍA
-========================================== */
-
-.gallery-section{
-
-    position:relative;
-
-    width:100%;
-
-    min-height:100vh;
-
-    padding:
-
-    90px
-    30px
-    120px;
-
-    overflow:hidden;
-
-}
-
-
-/* ==========================================
-   TEXTURA
-========================================== */
-
-.gallery-section::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    opacity:.25;
-
-    background-image:
-
-    radial-gradient(
-        rgba(255,255,255,.35) 1px,
-        transparent 1px
-    );
-
-    background-size:
-
-    24px 24px;
-
-    pointer-events:none;
-
-}
-
-
-/* ==========================================
-   CABECERA
-========================================== */
-
-.gallery-header{
-
-    text-align:center;
-
-    max-width:700px;
-
-    margin:auto;
-
-    margin-bottom:80px;
-
-    position:relative;
-
-    z-index:10;
-
-}
-
-
-.subtitle{
-
-    display:inline-block;
-
-    color:var(--blue);
-
-    letter-spacing:6px;
-
-    text-transform:uppercase;
-
-    font-size:13px;
-
-    margin-bottom:18px;
-
-}
-
-
-.gallery-header h2{
-
-    font-size:clamp(
-        42px,
-        6vw,
-        70px
-    );
-
-    color:var(--blue-dark);
-
-    font-weight:300;
-
-    margin-bottom:20px;
-
-    line-height:1.1;
-
-}
-
-
-.gallery-header p{
-
-    color:#7A7066;
-
-    font-size:18px;
-
-    line-height:1.8;
-
-}
-
-
-/* ==========================================
-   COVERFLOW
-========================================== */
-
-.coverflow{
-
-    position:relative;
-
-    width:100%;
-
-    max-width:1300px;
-
-    margin:auto;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-}
-
-
-/* ==========================================
-   TRACK
-========================================== */
-
-.coverflow-track{
-
-    position:relative;
-
-    width:100%;
-
-    height:620px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    perspective:2200px;
-
-    transform-style:preserve-3d;
-
-}
-
-
-/* ==========================================
-   BOTONES
-========================================== */
-
-.nav{
-
-    position:absolute;
-
-    width:65px;
-
-    height:65px;
-
-    border:none;
-
-    border-radius:50%;
-
-    cursor:pointer;
-
-    background:
-
-    rgba(255,255,255,.55);
-
-    backdrop-filter:blur(12px);
-
-    color:var(--blue-dark);
-
-    font-size:28px;
-
-    transition:.35s;
-
-    box-shadow:
-
-    0 12px 30px rgba(0,0,0,.12);
-
-    z-index:200;
-
-}
-
-.nav:hover{
-
-    transform:
-
-    translateY(-5px)
-    scale(1.08);
-
-    background:white;
-
-}
-
-.prev{
-
-    left:0;
-
-}
-
-.next{
-
-    right:0;
-
-}
-
-
-/* ==========================================
-   DECORACIONES
-========================================== */
-
-.floating-decoration{
-
-    position:absolute;
-
-    color:rgba(110,132,154,.18);
-
-    user-select:none;
-
-    pointer-events:none;
-
-    animation:
-
-    float 9s ease-in-out infinite;
-
-}
-
-.deco-1{
-
-    top:90px;
-    left:8%;
-
-    font-size:32px;
-
-}
-
-.deco-2{
-
-    top:180px;
-    right:10%;
-
-    font-size:26px;
-
-    animation-delay:2s;
-
-}
-
-.deco-3{
-
-    bottom:120px;
-    left:12%;
-
-    font-size:28px;
-
-    animation-delay:3s;
-
-}
-
-.deco-4{
-
-    bottom:90px;
-    right:9%;
-
-    font-size:34px;
-
-    animation-delay:1s;
-
-}
-
-
-/* ==========================================
-   ANIMACIÓN
-========================================== */
-
-@keyframes float{
-
-    0%{
-
-        transform:
-        translateY(0px)
-        rotate(0deg);
-
-    }
-
-    50%{
-
-        transform:
-        translateY(-18px)
-        rotate(8deg);
-
-    }
-
-    100%{
-
-        transform:
-        translateY(0px)
-        rotate(0deg);
-
-    }
-
-}
-
-
-/* ==========================================
-   INDICADORES
-========================================== */
-
-.gallery-indicators{
-
-    margin-top:55px;
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:14px;
-
-}
-
-.indicator{
-
-    width:12px;
-
-    height:12px;
-
-    border-radius:50%;
-
-    background:#DCCFBE;
-
-    transition:.35s;
-
-}
-
-.indicator.active{
-
-    width:34px;
-
-    border-radius:20px;
-
-    background:var(--blue);
-
-}
-
-/* ==========================================
-   TARJETAS
-========================================== */
-
-.card{
-
-    position:absolute;
-
-    width:340px;
-    height:480px;
-
-    border-radius:32px;
-
-    overflow:hidden;
-
-    cursor:pointer;
-
-    transition:
-        transform .8s cubic-bezier(.22,.61,.36,1),
-        filter .8s,
-        opacity .8s,
-        box-shadow .8s;
-
-    transform-style:preserve-3d;
-
-    box-shadow:
-        0 30px 70px rgba(0,0,0,.18);
-
-    background:white;
-
-}
-
-
-/* ==========================================
-   IMAGEN
-========================================== */
-
-.card img{
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    display:block;
-
-    transition:
-        transform .8s,
-        filter .8s;
-
-}
-
-
-/* ==========================================
-   MARCO
-========================================== */
-
-.card::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:12px;
-
-    border-radius:22px;
-
-    border:2px solid rgba(255,255,255,.45);
-
-    z-index:10;
-
-    pointer-events:none;
-
-}
-
-
-/* ==========================================
-   BRILLO
-========================================== */
-
-.card::after{
-
-    content:"";
-
-    position:absolute;
-
-    top:-140%;
-
-    left:-60%;
-
-    width:70%;
-
-    height:320%;
-
-    background:
-
-        linear-gradient(
-
-            transparent,
-
-            rgba(255,255,255,.35),
-
-            transparent
-
+  </section>
+
+  <script>
+    (function () {
+      const card = document.querySelector('.confirmation-card');
+      const button = document.querySelector('.confirm-btn');
+      const shine = document.querySelector('.shine');
+      const sparkles = document.querySelectorAll('.sparkle');
+
+      if (!card || !button) return;
+
+      /* Aparición al hacer scroll */
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(80px)';
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          card.style.transition = 'all 1.2s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+          observer.unobserve(card);
+        });
+      }, { threshold: 0.25 });
+
+      observer.observe(card);
+
+      /* Brillo automático */
+      if (shine) {
+        setInterval(function () {
+          shine.style.animation = 'none';
+          void shine.offsetWidth;
+          shine.style.animation = 'shine 1.2s ease';
+        }, 6000);
+      }
+
+      /* Botón respirando */
+      setInterval(function () {
+        button.animate(
+          [
+            { transform: 'scale(1)' },
+            { transform: 'scale(1.03)' },
+            { transform: 'scale(1)' },
+          ],
+          { duration: 2500, easing: 'ease-in-out' },
         );
-
-    transform:
-
-        rotate(25deg);
-
-    transition:1.2s;
-
-}
-
-.card:hover::after{
-
-    left:150%;
-
-}
-
-
-/* ==========================================
-   HOVER
-========================================== */
-
-.card:hover{
-
-    box-shadow:
-
-        0 40px 90px rgba(0,0,0,.22);
-
-}
-
-.card:hover img{
-
-    transform:scale(1.05);
-
-}
-
-
-/* ==========================================
-   POSICIÓN CENTRAL
-========================================== */
-
-.card.active{
-
-    transform:
-
-        translateX(0)
-        translateZ(220px)
-        scale(1);
-
-    z-index:100;
-
-    filter:none;
-
-    opacity:1;
-
-}
-
-
-/* ==========================================
-   IZQUIERDA
-========================================== */
-
-.card.left-1{
-
-    transform:
-
-        translateX(-240px)
-        translateZ(50px)
-        rotateY(40deg)
-        scale(.88);
-
-    opacity:.85;
-
-    filter:
-
-        brightness(.85);
-
-    z-index:70;
-
-}
-
-.card.left-2{
-
-    transform:
-
-        translateX(-450px)
-        translateZ(-120px)
-        rotateY(55deg)
-        scale(.72);
-
-    opacity:.45;
-
-    filter:
-
-        blur(2px)
-        brightness(.7);
-
-    z-index:40;
-
-}
-
-.card.left-3{
-
-    transform:
-
-        translateX(-640px)
-        translateZ(-260px)
-        rotateY(65deg)
-        scale(.58);
-
-    opacity:0;
-
-    pointer-events:none;
-
-}
-
-
-/* ==========================================
-   DERECHA
-========================================== */
-
-.card.right-1{
-
-    transform:
-
-        translateX(240px)
-        translateZ(50px)
-        rotateY(-40deg)
-        scale(.88);
-
-    opacity:.85;
-
-    filter:
-
-        brightness(.85);
-
-    z-index:70;
-
-}
-
-.card.right-2{
-
-    transform:
-
-        translateX(450px)
-        translateZ(-120px)
-        rotateY(-55deg)
-        scale(.72);
-
-    opacity:.45;
-
-    filter:
-
-        blur(2px)
-        brightness(.7);
-
-    z-index:40;
-
-}
-
-.card.right-3{
-
-    transform:
-
-        translateX(640px)
-        translateZ(-260px)
-        rotateY(-65deg)
-        scale(.58);
-
-    opacity:0;
-
-    pointer-events:none;
-
-}
-
-
-/* ==========================================
-   REFLEJO
-========================================== */
-
-.card img::after{
-
-    content:"";
-
-    display:none;
-
-}
-
-/* usamos un div virtual */
-
-.card{
-
-    -webkit-box-reflect:
-
-        below 10px
-
-        linear-gradient(
-
-            transparent,
-
-            rgba(255,255,255,.05),
-
-            rgba(0,0,0,.18)
-
-        );
-
-}
-
-
-/* ==========================================
-   SOMBRA INFERIOR
-========================================== */
-
-.card-shadow{
-
-    position:absolute;
-
-    width:260px;
-
-    height:35px;
-
-    background:
-
-        radial-gradient(
-
-            rgba(0,0,0,.22),
-
-            transparent 70%
-
-        );
-
-    bottom:-25px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-}
-
-
-/* ==========================================
-   EFECTO FOCUS
-========================================== */
-
-.card.active img{
-
-    filter:none;
-
-}
-
-.card.left-1 img,
-.card.right-1 img{
-
-    filter:saturate(.9);
-
-}
-
-.card.left-2 img,
-.card.right-2 img{
-
-    filter:
-
-        grayscale(.15)
-        brightness(.8);
-
-}
-
-
-/* ==========================================
-   APARICIÓN
-========================================== */
-
-@keyframes fadeScale{
-
-    from{
-
-        opacity:0;
-
-        transform:
-
-            scale(.85);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-
-            scale(1);
-
-    }
-
-}
-
-.card.active{
-
-    animation:
-
-        fadeScale .8s;
-
-}
-
-
-/* ==========================================
-   COVERFLOW PREMIUM
-========================================== */
-
-const cards = [...document.querySelectorAll(".card")];
-const indicators = [...document.querySelectorAll(".indicator")];
-
-const prevBtn = document.querySelector(".prev");
-const nextBtn = document.querySelector(".next");
-
-let current = 0;
-let autoPlay;
-
-/*==========================================
-    POSICIONES
-==========================================*/
-
-function updateCoverflow(){
-
-    cards.forEach(card=>{
-
-        card.classList.remove(
-            "active",
-            "left-1",
-            "left-2",
-            "left-3",
-            "right-1",
-            "right-2",
-            "right-3"
-        );
-
-    });
-
-    indicators.forEach(i=>i.classList.remove("active"));
-
-    indicators[current].classList.add("active");
-
-    cards.forEach((card,index)=>{
-
-        let diff=index-current;
-
-        if(diff>cards.length/2)
-            diff-=cards.length;
-
-        if(diff<-cards.length/2)
-            diff+=cards.length;
-
-        switch(diff){
-
-            case 0:
-                card.classList.add("active");
-                break;
-
-            case -1:
-                card.classList.add("left-1");
-                break;
-
-            case -2:
-                card.classList.add("left-2");
-                break;
-
-            case -3:
-                card.classList.add("left-3");
-                break;
-
-            case 1:
-                card.classList.add("right-1");
-                break;
-
-            case 2:
-                card.classList.add("right-2");
-                break;
-
-            case 3:
-                card.classList.add("right-3");
-                break;
-
-            default:
-
-                card.style.opacity="0";
-                card.style.pointerEvents="none";
-
-                return;
-
+      }, 3500);
+
+      /* Partículas flotantes */
+      sparkles.forEach(function (sparkle) {
+        let angle = Math.random() * 360;
+        const radius = 10 + Math.random() * 18;
+
+        function animate() {
+          angle += 0.3;
+          sparkle.style.transform =
+            'translate(' + (Math.cos(angle) * radius) + 'px, ' + (Math.sin(angle) * radius) + 'px)';
+          requestAnimationFrame(animate);
         }
 
-        card.style.opacity="";
-        card.style.pointerEvents="";
-
-    });
-
-}
-
-/*==========================================
-    SIGUIENTE
-==========================================*/
-
-function next(){
-
-    current++;
-
-    if(current>=cards.length)
-        current=0;
-
-    updateCoverflow();
-
-}
-
-/*==========================================
-    ANTERIOR
-==========================================*/
-
-function prev(){
-
-    current--;
-
-    if(current<0)
-        current=cards.length-1;
-
-    updateCoverflow();
-
-}
-
-/*==========================================
-    BOTONES
-==========================================*/
-
-nextBtn.addEventListener("click",()=>{
-
-    next();
-
-    restartAutoplay();
-
-});
-
-prevBtn.addEventListener("click",()=>{
-
-    prev();
-
-    restartAutoplay();
-
-});
-
-/*==========================================
-    INDICADORES
-==========================================*/
-
-indicators.forEach((dot,index)=>{
-
-    dot.addEventListener("click",()=>{
-
-        current=index;
-
-        updateCoverflow();
-
-        restartAutoplay();
-
-    });
-
-});
-
-/*==========================================
-    CLICK EN TARJETAS
-==========================================*/
-
-cards.forEach((card,index)=>{
-
-    card.addEventListener("click",()=>{
-
-        current=index;
-
-        updateCoverflow();
-
-        restartAutoplay();
-
-    });
-
-});
-
-/*==========================================
-    TECLADO
-==========================================*/
-
-document.addEventListener("keydown",(e)=>{
-
-    if(e.key==="ArrowRight"){
-
-        next();
-        restartAutoplay();
-
-    }
-
-    if(e.key==="ArrowLeft"){
-
-        prev();
-        restartAutoplay();
-
-    }
-
-});
-
-/*==========================================
-    AUTOPLAY
-==========================================*/
-
-function startAutoplay(){
-
-    autoPlay=setInterval(()=>{
-
-        next();
-
-    },4500);
-
-}
-
-function restartAutoplay(){
-
-    clearInterval(autoPlay);
-
-    startAutoplay();
-
-}
-
-/*==========================================
-    PAUSA AL HACER HOVER
-==========================================*/
-
-const gallery=document.querySelector(".coverflow");
-
-gallery.addEventListener("mouseenter",()=>{
-
-    clearInterval(autoPlay);
-
-});
-
-gallery.addEventListener("mouseleave",()=>{
-
-    startAutoplay();
-
-});
-
-/*==========================================
-    SWIPE CELULAR
-==========================================*/
-
-let startX=0;
-let endX=0;
-
-gallery.addEventListener("touchstart",(e)=>{
-
-    startX=e.touches[0].clientX;
-
-});
-
-gallery.addEventListener("touchmove",(e)=>{
-
-    endX=e.touches[0].clientX;
-
-});
-
-gallery.addEventListener("touchend",()=>{
-
-    let distance=startX-endX;
-
-    if(Math.abs(distance)<40)
-        return;
-
-    if(distance>0)
-        next();
-    else
-        prev();
-
-    restartAutoplay();
-
-});
-
-/*==========================================
-    DRAG MOUSE
-==========================================*/
-
-let mouseDown=false;
-let mouseStart=0;
-
-gallery.addEventListener("mousedown",(e)=>{
-
-    mouseDown=true;
-
-    mouseStart=e.clientX;
-
-});
-
-window.addEventListener("mouseup",()=>{
-
-    mouseDown=false;
-
-});
-
-gallery.addEventListener("mousemove",(e)=>{
-
-    if(!mouseDown)
-        return;
-
-    let distance=mouseStart-e.clientX;
-
-    if(Math.abs(distance)<80)
-        return;
-
-    mouseDown=false;
-
-    if(distance>0)
-        next();
-    else
-        prev();
-
-    restartAutoplay();
-
-});
-
-/*==========================================
-    INICIO
-==========================================*/
-
-updateCoverflow();
-
-startAutoplay();
+        animate();
+      });
+
+      /* Efecto ripple */
+      button.addEventListener('click', function (e) {
+        const circle = document.createElement('span');
+        const diameter = Math.max(button.clientWidth, button.clientHeight);
+        const radius = diameter / 2;
+
+        circle.style.width = circle.style.height = diameter + 'px';
+        circle.style.left = (e.clientX - button.offsetLeft - radius) + 'px';
+        circle.style.top = (e.clientY - button.offsetTop - radius) + 'px';
+        circle.classList.add('ripple');
+
+        const old = button.getElementsByClassName('ripple')[0];
+        if (old) old.remove();
+        button.appendChild(circle);
+      });
+
+      /* Revelar texto */
+      const texts = document.querySelectorAll(
+        '.title, .divider, .subtitle, .description, .confirm-btn',
+      );
+
+      texts.forEach(function (el, index) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        setTimeout(function () {
+          el.style.transition = 'all .8s ease';
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, 300 + (index * 180));
+      });
+    })();
+  </script>
+</body>
+</html>

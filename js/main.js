@@ -6,6 +6,7 @@ import { initCoverflow } from '../galeria-coverflow/coverflow.js';
 import { initItinerario2 } from './itinerario2.js';
 import { initUbicaciones } from './ubicaciones.js';
 import { initLluviaSobres } from './lluvia-sobres.js';
+import { initConfirmacion } from './confirmacion.js';
 
 initReveal();
 initPresentacionAnim();
@@ -15,3 +16,4 @@ initCoverflow();
 initItinerario2();
 initUbicaciones();
 initLluviaSobres();
+initConfirmacion();

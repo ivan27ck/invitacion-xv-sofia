@@ -1,6 +1,6 @@
 /* ============================================
-   Sección 4 — Galería 2 (carrusel)
-   Posiciones calibradas sobre bg-carrusel.jpg (853×1280)
+   Sección 3 — Galería 1 (carrusel con peek)
+   Posiciones calibradas sobre bg-carrusel.png (853×1280)
    ============================================ */
 
 #galeria2 {
@@ -13,6 +13,8 @@
   --arrow-left: 16%;
   --arrow-right: 16%;
   --dots-top: 74.2%;
+  --carrusel-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --carrusel-duration: 0.85s;
 }
 
 #galeria2 .content {
@@ -24,35 +26,85 @@
   position: absolute;
   inset: 0;
   z-index: 2;
+  perspective: 1000px;
 }
 
-/* Marco · contenedor fijo calibrado al fondo; la foto se acomoda sin deformarse */
+/* Escenario a pantalla completa · la foto activa sigue en el marco */
 .carrusel__viewport {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  transform-style: preserve-3d;
+}
+
+.carrusel__slide {
   position: absolute;
   top: var(--photo-top);
   left: var(--photo-left);
   width: var(--photo-width);
   height: var(--photo-height);
-  overflow: hidden;
   border-radius: clamp(8px, 2.2vw, 14px);
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, 0, -180px) scale(0.7);
+  transform-origin: center center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+  transition:
+    transform var(--carrusel-duration) var(--carrusel-ease),
+    opacity calc(var(--carrusel-duration) * 0.85) ease,
+    box-shadow var(--carrusel-duration) ease;
+  cursor: pointer;
 }
 
 .carrusel__photo {
-  position: absolute;
-  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
   max-width: none;
   object-fit: cover;
   object-position: center center;
-  opacity: 0;
-  transition: opacity 0.55s ease;
   pointer-events: none;
 }
 
-.carrusel__photo.is-active {
+/* Foto principal · mismo lugar y tamaño del marco */
+.carrusel__slide.is-active {
   opacity: 1;
+  z-index: 5;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0) scale(1);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+}
+
+/* Peek izquierdo / derecho · misma base, menos altura */
+.carrusel__slide.is-left-1 {
+  opacity: 0.82;
+  z-index: 4;
+  pointer-events: auto;
+  transform: translate3d(-58%, 0, -30px) rotateY(26deg) scale3d(0.96, 0.68, 1);
+}
+
+.carrusel__slide.is-right-1 {
+  opacity: 0.82;
+  z-index: 4;
+  pointer-events: auto;
+  transform: translate3d(58%, 0, -30px) rotateY(-26deg) scale3d(0.96, 0.68, 1);
+}
+
+.carrusel__slide.is-left-2 {
+  opacity: 0.4;
+  z-index: 2;
+  pointer-events: none;
+  transform: translate3d(-98%, 0, -70px) rotateY(38deg) scale3d(0.84, 0.58, 1);
+}
+
+.carrusel__slide.is-right-2 {
+  opacity: 0.4;
+  z-index: 2;
+  pointer-events: none;
+  transform: translate3d(98%, 0, -70px) rotateY(-38deg) scale3d(0.84, 0.58, 1);
 }
 
 /* Flechas · botones visibles */
@@ -68,7 +120,7 @@
   background: var(--navy);
   color: #fff;
   cursor: pointer;
-  z-index: 3;
+  z-index: 6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -143,7 +195,7 @@
   display: flex;
   align-items: center;
   gap: clamp(8px, 2vw, 12px);
-  z-index: 3;
+  z-index: 6;
   padding: 6px 12px;
   border-radius: 20px;
   background: rgba(247, 241, 230, 0.55);
@@ -177,8 +229,28 @@
   outline-offset: 2px;
 }
 
+@media (max-width: 480px) {
+  .carrusel__slide.is-left-1 {
+    transform: translate3d(-42%, 0, -30px) rotateY(20deg) scale3d(0.96, 0.68, 1);
+  }
+
+  .carrusel__slide.is-right-1 {
+    transform: translate3d(42%, 0, -30px) rotateY(-20deg) scale3d(0.96, 0.68, 1);
+  }
+
+  .carrusel__slide.is-left-2,
+  .carrusel__slide.is-right-2 {
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .carrusel__photo { transition: none; }
+  .carrusel__slide {
+    transition: none;
+  }
+
   .carrusel__btn--prev,
-  .carrusel__btn--next { animation: none; }
+  .carrusel__btn--next {
+    animation: none;
+  }
 }

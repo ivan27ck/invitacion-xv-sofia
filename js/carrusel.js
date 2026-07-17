@@ -1,10 +1,27 @@
-/** Carrusel · galerías con marco */
+/** Carrusel · galería con marco + peek lateral */
 
 import { GALERIA_FOTOS } from './config.js';
+
+const POS_CLASSES = [
+  'is-active',
+  'is-left-1', 'is-left-2',
+  'is-right-1', 'is-right-2',
+];
 
 function buildSrcset(photo) {
   if (!photo.src2x) return undefined;
   return `${photo.src} 1x, ${photo.src2x} 2x`;
+}
+
+function posClassFor(diff) {
+  switch (diff) {
+    case 0: return 'is-active';
+    case -1: return 'is-left-1';
+    case -2: return 'is-left-2';
+    case 1: return 'is-right-1';
+    case 2: return 'is-right-2';
+    default: return null;
+  }
 }
 
 function initCarruselIn(sectionId) {
@@ -15,26 +32,33 @@ function initCarruselIn(sectionId) {
   const dotsWrap = section.querySelector('.carrusel__dots');
   const btnPrev = section.querySelector('.carrusel__btn--prev');
   const btnNext = section.querySelector('.carrusel__btn--next');
+  const carrusel = section.querySelector('.carrusel');
 
   if (!viewport || !dotsWrap || !GALERIA_FOTOS.length) return;
 
   viewport.innerHTML = '';
   dotsWrap.innerHTML = '';
 
-  const photos = GALERIA_FOTOS.map((item, i) => {
+  const slides = GALERIA_FOTOS.map((item, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'carrusel__slide';
+    slide.dataset.index = String(i);
+
     const img = document.createElement('img');
-    img.className = 'carrusel__photo' + (i === 0 ? ' is-active' : '');
+    img.className = 'carrusel__photo';
     img.src = item.src;
     img.alt = item.alt;
     img.decoding = 'async';
     img.loading = i === 0 ? 'eager' : 'lazy';
+    img.draggable = false;
     img.sizes = '(max-width: 480px) 45vw, 400px';
 
     const srcset = buildSrcset(item);
     if (srcset) img.srcset = srcset;
 
-    viewport.appendChild(img);
-    return img;
+    slide.appendChild(img);
+    viewport.appendChild(slide);
+    return slide;
   });
 
   const dots = GALERIA_FOTOS.map((_, i) => {
@@ -49,12 +73,23 @@ function initCarruselIn(sectionId) {
   });
 
   let current = 0;
+  let autoPlay = null;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function goTo(index) {
-    current = (index + photos.length) % photos.length;
+  function wrapDiff(index) {
+    let diff = index - current;
+    if (diff > slides.length / 2) diff -= slides.length;
+    if (diff < -slides.length / 2) diff += slides.length;
+    return diff;
+  }
 
-    photos.forEach((photo, i) => {
-      photo.classList.toggle('is-active', i === current);
+  function updateSlides() {
+    slides.forEach((slide, index) => {
+      const next = posClassFor(wrapDiff(index));
+      POS_CLASSES.forEach((cls) => {
+        if (cls !== next) slide.classList.remove(cls);
+      });
+      if (next) slide.classList.add(next);
     });
 
     dots.forEach((dot, i) => {
@@ -64,19 +99,67 @@ function initCarruselIn(sectionId) {
     });
   }
 
-  btnPrev?.addEventListener('click', () => goTo(current - 1));
-  btnNext?.addEventListener('click', () => goTo(current + 1));
-  dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+  function goTo(index) {
+    if (!slides.length) return;
+    current = (index + slides.length) % slides.length;
+    updateSlides();
+  }
 
-  viewport.addEventListener('touchstart', (e) => {
-    viewport._startX = e.changedTouches[0].clientX;
+  function next() {
+    goTo(current + 1);
+  }
+
+  function prev() {
+    goTo(current - 1);
+  }
+
+  function startAutoplay() {
+    if (reduced || slides.length < 2) return;
+    window.clearInterval(autoPlay);
+    autoPlay = window.setInterval(next, 4000);
+  }
+
+  function restartAutoplay() {
+    window.clearInterval(autoPlay);
+    startAutoplay();
+  }
+
+  btnPrev?.addEventListener('click', () => { prev(); restartAutoplay(); });
+  btnNext?.addEventListener('click', () => { next(); restartAutoplay(); });
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => { goTo(i); restartAutoplay(); });
+  });
+  slides.forEach((slide, i) => {
+    slide.addEventListener('click', () => { goTo(i); restartAutoplay(); });
+  });
+
+  carrusel?.addEventListener('touchstart', (e) => {
+    carrusel._startX = e.changedTouches[0].clientX;
   }, { passive: true });
 
-  viewport.addEventListener('touchend', (e) => {
-    const diff = e.changedTouches[0].clientX - (viewport._startX ?? 0);
+  carrusel?.addEventListener('touchend', (e) => {
+    const diff = e.changedTouches[0].clientX - (carrusel._startX ?? 0);
     if (Math.abs(diff) < 40) return;
-    goTo(diff < 0 ? current + 1 : current - 1);
+    if (diff < 0) next();
+    else prev();
+    restartAutoplay();
   }, { passive: true });
+
+  carrusel?.addEventListener('mouseenter', () => window.clearInterval(autoPlay));
+  carrusel?.addEventListener('mouseleave', startAutoplay);
+
+  const viewObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) startAutoplay();
+        else window.clearInterval(autoPlay);
+      });
+    },
+    { threshold: 0.35 },
+  );
+  viewObserver.observe(section);
+
+  updateSlides();
 }
 
 export function initCarrusel() {

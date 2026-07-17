@@ -54,6 +54,7 @@
   margin: 0 0 16px;
   line-height: 1.15;
   letter-spacing: 0.06em;
+  transform: translateY(clamp(48px, 10vh, 96px));
 }
 
 .gcv__lead {

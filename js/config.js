@@ -1,5 +1,8 @@
 /** Fecha y hora del evento (hora local). */
-export const EVENT_DATE = new Date('2026-11-14T19:00:00');
+export const EVENT_DATE = new Date('2026-08-22T19:00:00');
+
+/** Link de Google Forms para confirmar asistencia. */
+export const CONFIRM_FORM_URL = 'https://forms.gle/TUFORMULARIO';
 
 /**
  * Fotos de galería.

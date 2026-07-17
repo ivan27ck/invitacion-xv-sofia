@@ -34,7 +34,7 @@ invitacion-xv-sofia/
 Edita la fecha del evento en `js/config.js`:
 
 ```js
-export const EVENT_DATE = new Date('2026-11-14T19:00:00');
+export const EVENT_DATE = new Date('2026-08-22T19:00:00');
 ```
 
 ## Vista local

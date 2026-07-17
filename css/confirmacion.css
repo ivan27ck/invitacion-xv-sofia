@@ -1,0 +1,297 @@
+/* ============================================
+   Sección — Confirmación de asistencia
+   Fondo: fondo-inv.png (957×1643)
+   ============================================ */
+
+#confirmacion.invite-card {
+  --cf-blue: #32526e;
+  --cf-muted: rgb(88, 88, 88);
+}
+
+#confirmacion .bg {
+  object-fit: fill;
+  object-position: center;
+}
+
+#confirmacion .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding:
+    clamp(14%, 16vh, 20%)
+    clamp(10%, 9vw, 14%)
+    clamp(14%, 15vh, 18%);
+  text-align: center;
+  z-index: 1;
+  box-sizing: border-box;
+}
+
+#confirmacion .cf__sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+  opacity: 0.35;
+  filter: blur(1px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#confirmacion .cf__sparkle--1 {
+  top: 22%;
+  left: 20%;
+  animation: cf-twinkle 5s infinite;
+}
+
+#confirmacion .cf__sparkle--2 {
+  right: 18%;
+  top: 26%;
+  animation: cf-twinkle 7s infinite;
+}
+
+#confirmacion .cf__sparkle--3 {
+  left: 22%;
+  bottom: 22%;
+  animation: cf-twinkle 6s infinite;
+}
+
+#confirmacion .cf__sparkle--4 {
+  right: 20%;
+  bottom: 20%;
+  animation: cf-twinkle 4s infinite;
+}
+
+#confirmacion .cf__card {
+  width: min(100%, 520px);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(80px);
+}
+
+#confirmacion .cf__card.is-in {
+  transition: opacity 1.2s ease, transform 1.2s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#confirmacion .cf__title,
+#confirmacion .cf__divider,
+#confirmacion .cf__subtitle,
+#confirmacion .cf__desc,
+#confirmacion .cf__btn {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+#confirmacion .cf__card.is-in .cf__title,
+#confirmacion .cf__card.is-in .cf__divider,
+#confirmacion .cf__card.is-in .cf__subtitle,
+#confirmacion .cf__card.is-in .cf__desc,
+#confirmacion .cf__card.is-in .cf__btn {
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#confirmacion .cf__card.is-in .cf__title { transition-delay: 0.3s; }
+#confirmacion .cf__card.is-in .cf__divider { transition-delay: 0.48s; }
+#confirmacion .cf__card.is-in .cf__subtitle { transition-delay: 0.66s; }
+#confirmacion .cf__card.is-in .cf__desc { transition-delay: 0.84s; }
+#confirmacion .cf__card.is-in .cf__btn { transition-delay: 1.02s; }
+
+#confirmacion .cf__title {
+  margin: 0 0 clamp(12px, 2vh, 20px);
+  font-family: var(--font-caps);
+  font-size: clamp(28px, 7.5vw, 52px);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cf-blue);
+  line-height: 1.1;
+}
+
+#confirmacion .cf__divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 3vw, 18px);
+  margin-bottom: clamp(24px, 4vh, 40px);
+}
+
+#confirmacion .cf__divider span {
+  width: clamp(48px, 14vw, 120px);
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--silver-bright), transparent);
+}
+
+#confirmacion .cf__divider i {
+  color: var(--silver-bright);
+  font-size: clamp(12px, 2.8vw, 14px);
+}
+
+#confirmacion .cf__subtitle {
+  margin: 0 0 clamp(20px, 3.5vh, 32px);
+  font-family: var(--font-body);
+  font-size: 30px;
+  font-style: italic;
+  color: var(--cf-blue);
+  line-height: 1.5;
+}
+
+#confirmacion .cf__desc {
+  margin: 0 0 clamp(28px, 5vh, 52px);
+  font-family: var(--font-body);
+  font-size: clamp(19px, 4.5vw, 28px);
+  color: var(--cf-muted);
+  line-height: 1.6;
+}
+
+#confirmacion .cf__desc strong {
+  color: var(--cf-blue);
+  font-weight: 700;
+}
+
+#confirmacion .cf__btn {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  max-width: 100%;
+  padding: clamp(18px, 3.4vw, 26px) clamp(32px, 8vw, 60px);
+  border-radius: 100px;
+  text-decoration: none;
+  color: white;
+  font-family: var(--font-body);
+  font-size: clamp(19px, 4.4vw, 26px);
+  letter-spacing: 0.04em;
+  background: linear-gradient(180deg, #547a99, #355d7a);
+  border: 2px solid rgba(184, 194, 208, 0.85);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.15),
+    inset 0 2px 4px rgba(255, 255, 255, 0.25),
+    inset 0 -3px 5px rgba(0, 0, 0, 0.18);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+#confirmacion .cf__btn > span {
+  position: relative;
+  z-index: 2;
+}
+
+#confirmacion .cf__btn i {
+  margin-right: 10px;
+}
+
+#confirmacion .cf__shine {
+  position: absolute;
+  top: -50%;
+  left: -120%;
+  width: 80px;
+  height: 250%;
+  transform: rotate(25deg);
+  background: linear-gradient(transparent, rgba(255, 255, 255, 0.55), transparent);
+  pointer-events: none;
+}
+
+#confirmacion .cf__btn:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.2);
+}
+
+#confirmacion .cf__btn:hover .cf__shine {
+  animation: cf-shine 1s forwards;
+}
+
+#confirmacion .cf__ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  background: rgba(255, 255, 255, 0.35);
+  animation: cf-ripple 0.7s linear;
+  pointer-events: none;
+}
+
+@keyframes cf-shine {
+  100% { left: 180%; }
+}
+
+@keyframes cf-twinkle {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.8);
+  }
+}
+
+@keyframes cf-ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Escritorio: el marco se estira menos y el texto queda dentro del borde */
+@media (min-width: 768px) {
+  #confirmacion .content {
+    padding:
+      clamp(12%, 14vh, 18%)
+      clamp(14%, 16vw, 22%)
+      clamp(12%, 13vh, 16%);
+  }
+
+  #confirmacion .cf__title {
+    font-size: clamp(36px, 4.5vw, 52px);
+  }
+
+  #confirmacion .cf__subtitle {
+    font-size: clamp(26px, 3.2vw, 36px);
+  }
+
+  #confirmacion .cf__desc {
+    font-size: clamp(22px, 2.6vw, 28px);
+  }
+}
+
+@media (max-width: 380px) {
+  #confirmacion .content {
+    padding: 16% 11% 15%;
+  }
+
+  #confirmacion .cf__btn {
+    padding: 16px 28px;
+    font-size: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #confirmacion .cf__sparkle {
+    animation: none;
+  }
+
+  #confirmacion .cf__card,
+  #confirmacion .cf__title,
+  #confirmacion .cf__divider,
+  #confirmacion .cf__subtitle,
+  #confirmacion .cf__desc,
+  #confirmacion .cf__btn {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  #confirmacion .cf__btn:hover {
+    transform: none;
+  }
+
+  #confirmacion .cf__btn:hover .cf__shine {
+    animation: none;
+  }
+}
