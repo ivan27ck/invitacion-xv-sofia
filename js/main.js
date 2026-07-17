@@ -1,5 +1,6 @@
 import { initReveal } from './reveal.js';
 import { initPresentacionAnim } from './presentacion.js';
+import { initPadresPadrinos } from './padres-padrinos.js';
 import { initCountdown } from './countdown.js';
 import { initCarrusel } from './carrusel.js';
 import { initCoverflow } from '../galeria-coverflow/coverflow.js';
@@ -10,6 +11,7 @@ import { initConfirmacion } from './confirmacion.js';
 
 initReveal();
 initPresentacionAnim();
+initPadresPadrinos();
 initCountdown();
 initCarrusel();
 initCoverflow();

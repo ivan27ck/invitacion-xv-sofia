@@ -14,12 +14,12 @@
   font-family: var(--font-script);
   font-size: clamp(68px, 19vw, 118px);
   line-height: 0.95;
-  margin: 0;
+  margin: 0 0 clamp(16px, 4vw, 32px);
   opacity: 0;
 }
 
 #presentacion .name.animar {
-  animation: pres-nameFadeIn 1.2s ease-out forwards;
+  animation: pres-nameReveal 1.4s ease-out forwards;
 }
 
 #presentacion .name__shadow {
@@ -116,9 +116,22 @@
   animation: pres-revelarPalabra 0.6s ease-out forwards;
 }
 
-@keyframes pres-nameFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes pres-nameReveal {
+  0% {
+    opacity: 0;
+    filter: blur(10px) drop-shadow(0 0 0 rgba(217, 195, 155, 0));
+    transform: scale(0.92);
+  }
+  55% {
+    opacity: 1;
+    filter: blur(1px) drop-shadow(0 0 22px rgba(217, 195, 155, 0.85));
+    transform: scale(1.015);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0) drop-shadow(0 0 0 rgba(217, 195, 155, 0));
+    transform: scale(1);
+  }
 }
 
 @keyframes pres-fadeSlideUp {
@@ -143,7 +156,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #presentacion .name { opacity: 1; animation: none !important; }
+  #presentacion .name { opacity: 1; filter: none; animation: none !important; }
   #presentacion .subtitle { opacity: 1; animation: none !important; }
   #presentacion .presentacion__line { transform: scaleX(1); animation: none !important; }
   #presentacion .presentacion__line::after { animation: none !important; }

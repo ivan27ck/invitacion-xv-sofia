@@ -18,11 +18,10 @@ export function initLluviaSobres() {
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      title?.classList.add('is-in');
-      sobreWrap?.classList.add('is-in');
-      desc?.classList.add('is-in');
-      observer.unobserve(entry.target);
+      const visible = entry.isIntersecting;
+      title?.classList.toggle('is-in', visible);
+      sobreWrap?.classList.toggle('is-in', visible);
+      desc?.classList.toggle('is-in', visible);
     });
   }, { threshold: 0.3 });
 

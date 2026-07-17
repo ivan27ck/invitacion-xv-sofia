@@ -1,6 +1,4 @@
-/** Animación de títulos · letra por letra */
-
-const animatedTitles = new Set();
+/** Animación de títulos · letra por letra (repetible al reentrar en pantalla) */
 
 function wrapLetters(el, text) {
   const cs = getComputedStyle(el);
@@ -19,10 +17,12 @@ function wrapLetters(el, text) {
 }
 
 export function animateDrawTitle(el) {
-  if (animatedTitles.has(el)) return;
-  animatedTitles.add(el);
+  if (el.classList.contains('draw-title--animating')) return;
 
-  const text = el.dataset.draw || el.textContent.trim();
+  if (!el.dataset.drawOriginal) {
+    el.dataset.drawOriginal = el.dataset.draw || el.textContent.trim();
+  }
+  const text = el.dataset.drawOriginal;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (reduced) {
@@ -39,4 +39,11 @@ export function animateDrawTitle(el) {
       letter.classList.add('draw-letter--in');
     });
   });
+}
+
+/** Restaura el texto plano para que la próxima entrada en pantalla vuelva a dibujarlo. */
+export function resetDrawTitle(el) {
+  if (!el.classList.contains('draw-title--animating')) return;
+  el.classList.remove('draw-title--animating');
+  el.textContent = el.dataset.drawOriginal || el.textContent;
 }

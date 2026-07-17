@@ -41,9 +41,14 @@ export function initItinerario2() {
 
   const items = [...wrap.querySelectorAll('.it2__item')];
   const scroller = section.querySelector('.content');
-  let lastVisible = -1;
+  let maxIndexShown = -1;
 
+  /* La línea solo avanza hacia adelante: no se encoge si un ítem anterior
+     se oculta al reentrar, así siempre refleja el progreso más lejano visto. */
   function growLineTo(index) {
+    if (index < maxIndexShown) return;
+    maxIndexShown = index;
+
     const item = items[index];
     const node = item?.querySelector('.it2__node');
     if (!node) return;
@@ -56,7 +61,6 @@ export function initItinerario2() {
       : nodeRect.top + nodeRect.height / 2 - timelineTop;
 
     line.style.height = `${Math.max(0, height)}px`;
-    lastVisible = index;
   }
 
   if (reduced) {
@@ -66,15 +70,25 @@ export function initItinerario2() {
   }
 
   let nextRevealAt = 0;
+  const revealedOnce = new Set();
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-
       const item = entry.target;
       const index = items.indexOf(item);
-      observer.unobserve(item);
 
+      if (!entry.isIntersecting) {
+        item.classList.remove('is-visible');
+        return;
+      }
+
+      if (revealedOnce.has(index)) {
+        item.classList.add('is-visible');
+        growLineTo(index);
+        return;
+      }
+
+      revealedOnce.add(index);
       const now = performance.now();
       const delay = Math.max(0, nextRevealAt - now);
       nextRevealAt = Math.max(now, nextRevealAt) + STAGGER_MS;
@@ -111,6 +125,10 @@ export function initItinerario2() {
   }
 
   window.addEventListener('resize', () => {
-    if (lastVisible >= 0) growLineTo(lastVisible);
+    if (maxIndexShown >= 0) {
+      const savedMax = maxIndexShown;
+      maxIndexShown = -1;
+      growLineTo(savedMax);
+    }
   });
 }

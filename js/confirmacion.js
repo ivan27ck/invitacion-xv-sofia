@@ -25,9 +25,7 @@ export function initConfirmacion() {
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        card.classList.add('is-in');
-        observer.unobserve(card);
+        card.classList.toggle('is-in', entry.isIntersecting);
       });
     },
     { threshold: 0.25 },
