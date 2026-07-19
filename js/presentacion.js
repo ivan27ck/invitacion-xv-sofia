@@ -40,25 +40,44 @@ export function initPresentacionAnim() {
     return;
   }
 
+  let playing = false;
+
+  const play = () => {
+    if (playing) return;
+    playing = true;
+    name?.classList.add('animar');
+    subtitle?.classList.add('animar');
+    line?.classList.add('animar');
+    lineBottom?.classList.add('animar');
+    if (guarda) envolverPalabras(guarda, 1.9, 0.1);
+    if (fecha) envolverPalabras(fecha, 2.3, 0.1);
+  };
+
+  const reset = () => {
+    playing = false;
+    name?.classList.remove('animar');
+    subtitle?.classList.remove('animar');
+    line?.classList.remove('animar');
+    lineBottom?.classList.remove('animar');
+    restaurarPalabras(guarda);
+    restaurarPalabras(fecha);
+  };
+
   const animObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        name?.classList.add('animar');
-        subtitle?.classList.add('animar');
-        line?.classList.add('animar');
-        lineBottom?.classList.add('animar');
-        if (guarda) envolverPalabras(guarda, 1.9, 0.1);
-        if (fecha) envolverPalabras(fecha, 2.3, 0.1);
+        play();
       } else {
-        name?.classList.remove('animar');
-        subtitle?.classList.remove('animar');
-        line?.classList.remove('animar');
-        lineBottom?.classList.remove('animar');
-        restaurarPalabras(guarda);
-        restaurarPalabras(fecha);
+        reset();
       }
     });
   }, { threshold: 0.25 });
+
+  // Si la sección ya está a la vista (detrás del intro), animar de inmediato.
+  const rect = section.getBoundingClientRect();
+  if (rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25) {
+    play();
+  }
 
   animObserver.observe(section);
 }

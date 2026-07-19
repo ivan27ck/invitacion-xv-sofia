@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="es" class="intro-locked">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,35 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
+<body class="intro-locked">
+
+  <!-- Pantalla de bienvenida · Sobre con sello -->
+  <div id="intro" class="intro" role="dialog" aria-modal="true" aria-label="Pantalla de bienvenida">
+    <div class="intro__sparkle intro__sparkle--1" aria-hidden="true"></div>
+    <div class="intro__sparkle intro__sparkle--2" aria-hidden="true"></div>
+    <div class="intro__sparkle intro__sparkle--3" aria-hidden="true"></div>
+    <div class="intro__sparkle intro__sparkle--4" aria-hidden="true"></div>
+    <div class="intro__sparkle intro__sparkle--5" aria-hidden="true"></div>
+    <div class="intro__sparkle intro__sparkle--6" aria-hidden="true"></div>
+
+    <div class="intro__flash" aria-hidden="true"></div>
+
+    <div class="intro__content">
+      <p class="intro__eyebrow">Una invitación te espera</p>
+      <button type="button" id="intro-envelope" class="intro__envelope" aria-label="Abrir la invitación">
+        <img class="intro__envelope-img" src="assets/images/sobre.png" alt="" draggable="false">
+      </button>
+      <p class="intro__hint">Toca el sobre para abrir</p>
+    </div>
+  </div>
+
+  <audio id="bg-audio" preload="auto" loop>
+    <source src="assets/After%20Sunset%20-%20Alex%20Jones%20_%20Xander%20Jones.mp3" type="audio/mpeg">
+  </audio>
+
+  <button type="button" id="music-toggle" class="music-toggle" aria-pressed="true" aria-label="Pausar música">
+    <i class="fa-solid fa-pause" aria-hidden="true"></i>
+  </button>
 
   <!-- Sección 1 — Presentación -->
   <section id="presentacion" class="invite-card" style="--ar: 853/1280;">
@@ -29,8 +57,8 @@
     </div>
 
     <a href="#padres-padrinos" class="scroll-cue">
-      Sigue al Conejo Blanco
-      <span class="arrow">↓</span>
+      <span class="scroll-cue__label">Sigue al Conejo Blanco</span>
+      <i class="fa-solid fa-arrow-down arrow" aria-hidden="true"></i>
     </a>
   </section>
 
@@ -67,6 +95,11 @@
         <p class="pp__message" id="pp-message">Con su bendición y alegría, te invitamos a celebrar mis quince años</p>
       </div>
     </div>
+
+    <a href="#contador" class="scroll-cue">
+      <span class="scroll-cue__label">Sigue al Conejo Blanco</span>
+      <i class="fa-solid fa-arrow-down arrow" aria-hidden="true"></i>
+    </a>
   </section>
 
   <!-- Sección 2 — Contador -->
@@ -106,6 +139,11 @@
 
       <p class="date-small reveal">22 de agosto, 2026 · 7:00 PM</p>
     </div>
+
+    <a href="#galeria2" class="scroll-cue">
+      <span class="scroll-cue__label">Sigue al Conejo Blanco</span>
+      <i class="fa-solid fa-arrow-down arrow" aria-hidden="true"></i>
+    </a>
   </section>
 
   <!-- Sección 3 — Galería (carrusel) -->
@@ -126,29 +164,14 @@
         <div class="carrusel__dots" role="tablist" aria-label="Fotos de la galería"></div>
       </div>
     </div>
+
+    <a href="#itinerario2" class="scroll-cue">
+      <span class="scroll-cue__label">Sigue al Conejo Blanco</span>
+      <i class="fa-solid fa-arrow-down arrow" aria-hidden="true"></i>
+    </a>
   </section>
 
-  <!-- Sección 4 — Galería coverflow -->
-  <section id="galeria-coverflow" class="invite-card" style="--ar: 957/1643;" aria-label="Galería de recuerdos">
-    <img class="bg reveal" src="assets/images/fondo-inv.png" alt="Marco decorativo de pergamino">
-
-    <div class="content gcv__content">
-      <header class="gcv__header">
-        <h2 class="gcv__title">Galería</h2>
-       
-      </header>
-
-      <div class="gcv__coverflow">
-        <button type="button" class="gcv__nav gcv__nav--prev" aria-label="Foto anterior">❮</button>
-        <div class="gcv__track"></div>
-        <button type="button" class="gcv__nav gcv__nav--next" aria-label="Foto siguiente">❯</button>
-      </div>
-
-      <div class="gcv__indicators" role="tablist" aria-label="Fotos de la galería"></div>
-    </div>
-  </section>
-
-  <!-- Sección 5 — Itinerario -->
+  <!-- Sección 4 — Itinerario -->
   <section id="itinerario2" class="invite-card" style="--ar: 768/1376;">
     <img class="bg reveal" src="assets/images/bg-itinerario.png" alt="Fondo decorativo del itinerario">
 
@@ -162,6 +185,11 @@
         <div class="it2__items" id="itinerario2-items"></div>
       </div>
     </div>
+
+    <a href="#ubicaciones" class="scroll-cue">
+      <span class="scroll-cue__label">Sigue al Conejo Blanco</span>
+      <i class="fa-solid fa-arrow-down arrow" aria-hidden="true"></i>
+    </a>
   </section>
 
   <!-- Sección 6 — Ubicaciones -->
@@ -170,6 +198,11 @@
       <h2 class="ubicaciones__titulo">Ubicaciones</h2>
     </header>
     <div id="ubicaciones-list"></div>
+
+    <a href="#lluvia-sobres" class="scroll-cue scroll-cue--inline">
+      <span class="scroll-cue__label">Sigue al Conejo Blanco</span>
+      <i class="fa-solid fa-arrow-down arrow" aria-hidden="true"></i>
+    </a>
   </section>
 
   <!-- Sección 7 — Lluvia de sobres -->
@@ -187,6 +220,11 @@
         Es una tradición que los invitados obsequien dinero dentro de un sobre.
       </p>
     </div>
+
+    <a href="#confirmacion" class="scroll-cue">
+      <span class="scroll-cue__label">Sigue al Conejo Blanco</span>
+      <i class="fa-solid fa-arrow-down arrow" aria-hidden="true"></i>
+    </a>
   </section>
 
   <!-- Sección 8 — Confirmación de asistencia -->
@@ -226,9 +264,9 @@
 
         <a
           class="cf__btn"
-          href="https://forms.gle/TUFORMULARIO"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#"
+          role="button"
+          aria-disabled="true"
         >
           <span>
             <i class="fa-solid fa-envelope-open" aria-hidden="true"></i>

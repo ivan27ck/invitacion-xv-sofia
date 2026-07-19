@@ -11,8 +11,21 @@ export function initConfirmacion() {
   const sparkles = section.querySelectorAll('.cf__sparkle');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (button && CONFIRM_FORM_URL) {
-    button.href = CONFIRM_FORM_URL;
+  if (button) {
+    if (CONFIRM_FORM_URL) {
+      button.href = CONFIRM_FORM_URL;
+      button.target = '_blank';
+      button.rel = 'noopener noreferrer';
+      button.removeAttribute('aria-disabled');
+    } else {
+      button.href = '#';
+      button.removeAttribute('target');
+      button.removeAttribute('rel');
+      button.setAttribute('aria-disabled', 'true');
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+      });
+    }
   }
 
   if (!card) return;

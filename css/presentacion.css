@@ -109,6 +109,16 @@
   gap: 8px;
 }
 
+#presentacion .date-tag__label,
+#presentacion .date-tag__value {
+  opacity: 0;
+}
+
+#presentacion .date-tag__label.animar-palabras,
+#presentacion .date-tag__value.animar-palabras {
+  opacity: 1;
+}
+
 #presentacion .animar-palabras span {
   display: inline-block;
   opacity: 0;
@@ -160,6 +170,8 @@
   #presentacion .subtitle { opacity: 1; animation: none !important; }
   #presentacion .presentacion__line { transform: scaleX(1); animation: none !important; }
   #presentacion .presentacion__line::after { animation: none !important; }
+  #presentacion .date-tag__label,
+  #presentacion .date-tag__value { opacity: 1; }
   #presentacion .animar-palabras span { opacity: 1; filter: none; animation: none !important; }
 }
 
@@ -183,9 +195,8 @@
 
 #presentacion .scroll-cue {
   font-family: var(--font-sans);
-  font-size: clamp(7.5px, 1.6vw, 9.5px);
-  font-weight: 600;
-  letter-spacing: 0.38em;
+  font-size: clamp(8.5px, 1.9vw, 10px);
+  font-weight: 700;
+  letter-spacing: 0.24em;
   color: var(--navy);
-  opacity: 0.9;
 }

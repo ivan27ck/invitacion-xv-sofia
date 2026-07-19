@@ -30,5 +30,19 @@ export function initReveal() {
     });
   }, { threshold: 0.25 });
 
-  revealEls.forEach((el) => revealObserver.observe(el));
+  revealEls.forEach((el) => {
+    // Si ya está en viewport (p. ej. sección 1 detrás del intro), revelar ya
+    // para no mostrar el fondo crema vacío al cerrar el overlay.
+    const rect = el.getBoundingClientRect();
+    const inView =
+      rect.top < window.innerHeight * 0.75 &&
+      rect.bottom > window.innerHeight * 0.25;
+
+    if (inView) {
+      el.classList.add('is-visible');
+      if (el.classList.contains('draw-title')) animateDrawTitle(el);
+    }
+
+    revealObserver.observe(el);
+  });
 }
