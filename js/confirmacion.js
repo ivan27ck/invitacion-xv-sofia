@@ -56,13 +56,6 @@ export function initConfirmacion() {
   }
 
   if (button) {
-    setInterval(() => {
-      button.animate(
-        [{ transform: 'scale(1)' }, { transform: 'scale(1.03)' }, { transform: 'scale(1)' }],
-        { duration: 2500, easing: 'ease-in-out' },
-      );
-    }, 3500);
-
     button.addEventListener('click', (e) => {
       const diameter = Math.max(button.clientWidth, button.clientHeight);
       const radius = diameter / 2;
@@ -77,6 +70,7 @@ export function initConfirmacion() {
 
       button.querySelector('.cf__ripple')?.remove();
       button.appendChild(circle);
+      circle.addEventListener('animationend', () => circle.remove(), { once: true });
     });
   }
 
